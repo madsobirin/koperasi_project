@@ -101,44 +101,52 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 <span className="flex-1">Anggota</span>
               </Link>
 
-              {/* TRANSAKSI Section */}
+              {/* OPERASIONAL Section */}
               <div className="pt-2.5">
                 <div className="px-3 pb-1 text-[11px] text-[#94A3B8] uppercase tracking-wider font-bold">
-                  Transaksi
+                  Operasional
                 </div>
                 <div className="space-y-0.5">
                   <Link
-                    href="/dashboard/transaksi/penjualan"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    href="/dashboard/penjualan"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-semibold ${
+                      isLinkActive("/dashboard/penjualan") || isLinkActive("/dashboard/transaksi/penjualan")
+                        ? "bg-[#2563EB] text-white shadow-sm"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
                     </svg>
                     <span className="flex-1">Penjualan</span>
                   </Link>
                   <Link
-                    href="/dashboard/transaksi/pembelian"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    href="/dashboard/pembelian"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-semibold ${
+                      isLinkActive("/dashboard/pembelian") || isLinkActive("/dashboard/transaksi/pembelian")
+                        ? "bg-[#2563EB] text-white shadow-sm"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
                     </svg>
                     <span className="flex-1">Pembelian</span>
                   </Link>
+                  <Link
+                    href="/dashboard/simpanan"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-semibold ${
+                      isLinkActive("/dashboard/simpanan")
+                        ? "bg-[#2563EB] text-white shadow-sm"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a8 8 0 0 1-16 0V6"/>
+                    </svg>
+                    <span className="flex-1">Simpanan</span>
+                  </Link>
                 </div>
-              </div>
-
-              {/* SIMPANAN (Root Item di design.md Section 3) */}
-              <div className="pt-1">
-                <Link
-                  href="/dashboard/simpanan"
-                  className="flex items-center gap-3 px-3 py-2 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium"
-                >
-                  <svg className="w-4 h-4 text-[#64748B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a8 8 0 0 1-16 0V6"/>
-                  </svg>
-                  <span className="flex-1">Simpanan</span>
-                </Link>
               </div>
 
               {/* AKUNTANSI Section */}

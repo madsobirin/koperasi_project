@@ -21,6 +21,26 @@ export interface MemberMaster {
   totalDeposit?: string;
 }
 
+export interface SaleItem {
+  nama: string;
+  satuan: string;
+  qty: number;
+  harga: number;
+}
+
+export interface SaleTransaction {
+  id: string;
+  nota: string;
+  tanggal: string; // YYYY-MM-DD
+  jam: string; // HH:MM
+  pelangganNama: string;
+  pelangganKode: string; // e.g. "A001" or "NON"
+  status: "Lunas" | "Belum Lunas" | "Sebagian";
+  metode: "Kas Tunai" | "Kredit Anggota" | "Transfer Bank" | "Potong Simpanan";
+  diskon: number;
+  items: SaleItem[];
+}
+
 export interface Transaction {
   id: string;
   date: string;
@@ -185,6 +205,101 @@ export const MASTER_MEMBERS: MemberMaster[] = [
     nik: "3271046798120007",
     depositStatus: "Menunggu Verifikasi Berkas",
     totalDeposit: "Rp 0",
+  },
+];
+
+// Data Transaksi Penjualan Lengkap (design.md & Screen Transaksi Penjualan)
+export const MASTER_SALES: SaleTransaction[] = [
+  {
+    id: "1",
+    nota: "PJ-20261005-012",
+    tanggal: "2026-10-05",
+    jam: "14:20",
+    pelangganNama: "Budi Santoso",
+    pelangganKode: "A001",
+    status: "Lunas",
+    metode: "Kas Tunai",
+    diskon: 0,
+    items: [
+      { nama: "Beras Premium Ramos 5kg", satuan: "Sak", qty: 2, harga: 72500 },
+      { nama: "Minyak Goreng Sania 2L", satuan: "Pouch", qty: 1, harga: 30000 },
+    ],
+  },
+  {
+    id: "2",
+    nota: "PJ-20261005-011",
+    tanggal: "2026-10-05",
+    jam: "11:45",
+    pelangganNama: "Ahmad Dahlan",
+    pelangganKode: "A005",
+    status: "Belum Lunas",
+    metode: "Kredit Anggota",
+    diskon: 0,
+    items: [
+      { nama: "Gula Pasir Gulavit 1kg", satuan: "Kg", qty: 10, harga: 17500 },
+      { nama: "Kopi Kapal Api Special 165g", satuan: "Bungkus", qty: 15, harga: 14000 },
+      { nama: "Teh Celup Sariwangi 25s", satuan: "Kotak", qty: 5, harga: 7000 },
+    ],
+  },
+  {
+    id: "3",
+    nota: "PJ-20261005-010",
+    tanggal: "2026-10-05",
+    jam: "09:30",
+    pelangganNama: "Hendra Wijaya",
+    pelangganKode: "A003",
+    status: "Sebagian",
+    metode: "Transfer Bank",
+    diskon: 0,
+    items: [
+      { nama: "Susu Kental Manis Frisian Flag", satuan: "Kaleng", qty: 20, harga: 12500 },
+      { nama: "Tepung Terigu Segitiga Biru 1kg", satuan: "Kg", qty: 8, harga: 12500 },
+    ],
+  },
+  {
+    id: "4",
+    nota: "PJ-20261004-009",
+    tanggal: "2026-10-04",
+    jam: "16:15",
+    pelangganNama: "Dewi Sartika",
+    pelangganKode: "A004",
+    status: "Lunas",
+    metode: "Potong Simpanan",
+    diskon: 5001,
+    items: [
+      { nama: "Telur Ayam Negeri", satuan: "Kg", qty: 5, harga: 29000 },
+      { nama: "Kecap Manis Bango 520ml", satuan: "Pouch", qty: 3, harga: 23333 },
+    ],
+  },
+  {
+    id: "5",
+    nota: "PJ-20261004-008",
+    tanggal: "2026-10-04",
+    jam: "13:10",
+    pelangganNama: "Siti Rahmawati",
+    pelangganKode: "A002",
+    status: "Lunas",
+    metode: "Kas Tunai",
+    diskon: 0,
+    items: [
+      { nama: "Mie Instan Goreng (Kardus)", satuan: "Karton", qty: 1, harga: 115000 },
+      { nama: "Sabun Cuci Sunlight 750ml", satuan: "Pouch", qty: 1, harga: 10000 },
+    ],
+  },
+  {
+    id: "6",
+    nota: "PJ-20261003-007",
+    tanggal: "2026-10-03",
+    jam: "10:00",
+    pelangganNama: "Toko Mitra Barokah",
+    pelangganKode: "NON",
+    status: "Lunas",
+    metode: "Transfer Bank",
+    diskon: 15000,
+    items: [
+      { nama: "Minyak Goreng Bimoli Jerigen 5L", satuan: "Jerigen", qty: 6, harga: 95000 },
+      { nama: "Beras Pandan Wangi 10kg", satuan: "Sak", qty: 2, harga: 147500 },
+    ],
   },
 ];
 
