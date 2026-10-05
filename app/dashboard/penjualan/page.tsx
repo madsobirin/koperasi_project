@@ -221,7 +221,7 @@ export default function TransaksiPenjualanPage() {
 
         {/* Content Body */}
         <main className="w-full pt-20 px-4 sm:px-8 py-8 bg-[#F8FAFC] flex-1">
-          <div className="flex flex-col w-full max-w-[1400px] mx-auto">
+          <div className="flex flex-col w-full">
             {/* Breadcrumb & Header Summary */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
               <div>

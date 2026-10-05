@@ -41,6 +41,46 @@ export interface SaleTransaction {
   items: SaleItem[];
 }
 
+export interface PurchaseItem {
+  name: string;
+  nama?: string;
+  qty: number;
+  price: number;
+  harga?: number;
+  satuan?: string;
+  subtotal?: number;
+}
+
+export interface PurchaseTransaction {
+  id: number;
+  noNota: string;
+  tanggal: string; // "05 Okt 2026, 13:45 WIB"
+  tanggalIso: string; // "2026-10-05"
+  supplier: string;
+  total: number;
+  status: "Lunas" | "Belum Lunas" | "Sebagian";
+  metode: string;
+  jatuhTempo: string;
+  keterangan: string;
+  items: PurchaseItem[];
+  diskon?: number;
+}
+
+export interface SavingsTransaction {
+  id: number;
+  noBukti: string;
+  tanggal: string; // "05 Okt 2026"
+  jam: string; // "14:15 WIB"
+  anggotaNama: string;
+  anggotaKode: string;
+  initials: string;
+  jenis: "Simpanan Wajib" | "Simpanan Pokok" | "Simpanan Sukarela";
+  tipe: "Setor" | "Tarik";
+  nominal: number;
+  keterangan: string;
+  metode: string;
+}
+
 export interface Transaction {
   id: string;
   date: string;
@@ -300,6 +340,192 @@ export const MASTER_SALES: SaleTransaction[] = [
       { nama: "Minyak Goreng Bimoli Jerigen 5L", satuan: "Jerigen", qty: 6, harga: 95000 },
       { nama: "Beras Pandan Wangi 10kg", satuan: "Sak", qty: 2, harga: 147500 },
     ],
+  },
+];
+
+// Data Transaksi Pembelian Lengkap (design.md & Screen Transaksi Pembelian)
+export const MASTER_PURCHASES: PurchaseTransaction[] = [
+  {
+    id: 1,
+    noNota: "PB-20261005-004",
+    tanggal: "05 Okt 2026, 13:45 WIB",
+    tanggalIso: "2026-10-05",
+    supplier: "CV Berkah Abadi (Distributor Sembako)",
+    total: 680000,
+    status: "Lunas",
+    metode: "Kas Tunai",
+    jatuhTempo: "-",
+    keterangan: "Diterima lengkap gudang A",
+    items: [
+      { name: "Minyak Goreng Kita 2L (Dus)", qty: 2, price: 175000, subtotal: 350000 },
+      { name: "Gula Pasir Kristal Putih 50kg", qty: 1, price: 330000, subtotal: 330000 },
+    ],
+  },
+  {
+    id: 2,
+    noNota: "PB-20261004-003",
+    tanggal: "04 Okt 2026, 10:15 WIB",
+    tanggalIso: "2026-10-04",
+    supplier: "PT Indomarco Adi Prima (Grosir FMCG)",
+    total: 2450000,
+    status: "Belum Lunas",
+    metode: "Tempo 30 Hari",
+    jatuhTempo: "04 Nov 2026",
+    keterangan: "Faktur jatuh tempo 30 hari kalender",
+    items: [
+      { name: "Mie Instan Goreng (Karton)", qty: 15, price: 110000, subtotal: 1650000 },
+      { name: "Susu Kental Manis Carnation (Dus)", qty: 2, price: 400000, subtotal: 800000 },
+    ],
+  },
+  {
+    id: 3,
+    noNota: "PB-20261003-002",
+    tanggal: "03 Okt 2026, 15:30 WIB",
+    tanggalIso: "2026-10-03",
+    supplier: "UD Sumber Pangan Makmur (Beras & Minyak)",
+    total: 1850000,
+    status: "Sebagian",
+    metode: "Transfer Bank (DP 50%)",
+    jatuhTempo: "15 Okt 2026",
+    keterangan: "Telah dibayar uang muka Rp 925.000",
+    items: [
+      { name: "Beras Rojolele Delanggu 25kg", qty: 5, price: 370000, subtotal: 1850000 },
+    ],
+  },
+  {
+    id: 4,
+    noNota: "PB-20261002-001",
+    tanggal: "02 Okt 2026, 09:00 WIB",
+    tanggalIso: "2026-10-02",
+    supplier: "CV Mitra Distribusi Nusantara",
+    total: 820000,
+    status: "Lunas",
+    metode: "Kas Tunai",
+    jatuhTempo: "-",
+    keterangan: "Pembelian sabun dan deterjen eceran",
+    items: [
+      { name: "Deterjen Bubuk Daia 800g (Dus)", qty: 4, price: 205000, subtotal: 820000 },
+    ],
+  },
+  {
+    id: 5,
+    noNota: "PB-20260929-015",
+    tanggal: "29 Sep 2026, 14:20 WIB",
+    tanggalIso: "2026-09-29",
+    supplier: "PT Wings Surya Distribusi",
+    total: 1750000,
+    status: "Belum Lunas",
+    metode: "Tempo 14 Hari",
+    jatuhTempo: "13 Okt 2026",
+    keterangan: "Barang promo akhir kuartal",
+    items: [
+      { name: "Pembersih Lantai So Klin 800ml (Dus)", qty: 5, price: 150000, subtotal: 750000 },
+      { name: "Pasta Gigi Pepsodent 190g (Dus)", qty: 4, price: 250000, subtotal: 1000000 },
+    ],
+  },
+  {
+    id: 6,
+    noNota: "PB-20260925-012",
+    tanggal: "25 Sep 2026, 11:00 WIB",
+    tanggalIso: "2026-09-25",
+    supplier: "Perum BULOG Subdivre",
+    total: 7300000,
+    status: "Lunas",
+    metode: "Transfer Bank",
+    jatuhTempo: "-",
+    keterangan: "Pasokan Beras SPHP Program Kemitraan",
+    items: [
+      { name: "Beras SPHP 5kg (Kuintal)", qty: 10, price: 530000, subtotal: 5300000 },
+      { name: "Minyakita Bantal 1L (Karton)", qty: 10, price: 200000, subtotal: 2000000 },
+    ],
+  },
+];
+
+// Data Mutasi Simpanan Lengkap (design.md & Screen Simpanan Anggota)
+export const MASTER_SAVINGS: SavingsTransaction[] = [
+  {
+    id: 1,
+    noBukti: "SP-20261005-021",
+    tanggal: "05 Okt 2026",
+    jam: "14:15 WIB",
+    anggotaNama: "Budi Santoso",
+    anggotaKode: "A001",
+    initials: "BS",
+    jenis: "Simpanan Wajib",
+    tipe: "Setor",
+    nominal: 50000,
+    keterangan: "Setoran Wajib Bulan Oktober 2026",
+    metode: "Kas Tunai",
+  },
+  {
+    id: 2,
+    noBukti: "SP-20261005-020",
+    tanggal: "05 Okt 2026",
+    jam: "11:30 WIB",
+    anggotaNama: "Maya Indriati",
+    anggotaKode: "A008",
+    initials: "MI",
+    jenis: "Simpanan Pokok",
+    tipe: "Setor",
+    nominal: 500000,
+    keterangan: "Simpanan Pokok Keanggotaan Baru",
+    metode: "Transfer Bank",
+  },
+  {
+    id: 3,
+    noBukti: "SP-20261004-019",
+    tanggal: "04 Okt 2026",
+    jam: "16:00 WIB",
+    anggotaNama: "Hendra Wijaya",
+    anggotaKode: "A003",
+    initials: "HW",
+    jenis: "Simpanan Sukarela",
+    tipe: "Setor",
+    nominal: 250000,
+    keterangan: "Tabungan Qurban 2027",
+    metode: "Kas Tunai",
+  },
+  {
+    id: 4,
+    noBukti: "SP-20261004-018",
+    tanggal: "04 Okt 2026",
+    jam: "10:20 WIB",
+    anggotaNama: "Dewi Sartika",
+    anggotaKode: "A004",
+    initials: "DS",
+    jenis: "Simpanan Wajib",
+    tipe: "Setor",
+    nominal: 50000,
+    keterangan: "Setoran Wajib Bulan Oktober 2026",
+    metode: "Potong Gaji",
+  },
+  {
+    id: 5,
+    noBukti: "SP-20261003-017",
+    tanggal: "03 Okt 2026",
+    jam: "13:45 WIB",
+    anggotaNama: "Ahmad Dahlan",
+    anggotaKode: "A005",
+    initials: "AD",
+    jenis: "Simpanan Sukarela",
+    tipe: "Tarik",
+    nominal: 300000,
+    keterangan: "Penarikan simpanan sukarela untuk belanja toko",
+    metode: "Kas Tunai",
+  },
+  {
+    id: 6,
+    noBukti: "SP-20261002-016",
+    tanggal: "02 Okt 2026",
+    jam: "09:15 WIB",
+    anggotaNama: "Siti Rahmawati",
+    anggotaKode: "A002",
+    initials: "SR",
+    jenis: "Simpanan Wajib",
+    tipe: "Setor",
+    nominal: 50000,
+    keterangan: "Setoran Wajib Bulan Oktober 2026",
+    metode: "Kas Tunai",
   },
 ];
 
