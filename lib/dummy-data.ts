@@ -8,6 +8,19 @@ export interface Member {
   depositStatus: string;
 }
 
+export interface MemberMaster {
+  id: number;
+  code: string;
+  name: string;
+  gender: "Laki-laki" | "Perempuan";
+  status: "Aktif" | "Non-Aktif" | "Menunggu Verifikasi";
+  date: string;
+  email: string;
+  nik: string;
+  depositStatus?: string;
+  totalDeposit?: string;
+}
+
 export interface Transaction {
   id: string;
   date: string;
@@ -72,6 +85,106 @@ export const DUMMY_MEMBERS: Member[] = [
     joinedDate: "04 Okt 2026",
     initials: "DS",
     depositStatus: "Simpanan Pokok Lunas",
+  },
+];
+
+// Data Master Anggota Lengkap (design.md & Screen Data Anggota)
+export const MASTER_MEMBERS: MemberMaster[] = [
+  {
+    id: 1,
+    code: "A001",
+    name: "Budi Santoso",
+    gender: "Laki-laki",
+    status: "Aktif",
+    date: "12 Jan 2024",
+    email: "budi.santoso@email.com",
+    nik: "3271041988010002",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 4.250.000",
+  },
+  {
+    id: 2,
+    code: "A002",
+    name: "Siti Rahmawati",
+    gender: "Perempuan",
+    status: "Aktif",
+    date: "15 Jan 2024",
+    email: "siti.rahma@email.com",
+    nik: "3271045989020005",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 3.800.000",
+  },
+  {
+    id: 3,
+    code: "A003",
+    name: "Hendra Wijaya",
+    gender: "Laki-laki",
+    status: "Aktif",
+    date: "03 Feb 2024",
+    email: "h.wijaya@email.com",
+    nik: "3271042385050001",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 5.100.000",
+  },
+  {
+    id: 4,
+    code: "A004",
+    name: "Dewi Sartika",
+    gender: "Perempuan",
+    status: "Aktif",
+    date: "20 Mar 2024",
+    email: "dewi.sartika@email.com",
+    nik: "3271046193070008",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 2.950.000",
+  },
+  {
+    id: 5,
+    code: "A005",
+    name: "Agus Priyono",
+    gender: "Laki-laki",
+    status: "Non-Aktif",
+    date: "18 Apr 2024",
+    email: "agus.p@email.com",
+    nik: "3271041180030004",
+    depositStatus: "Simpanan Wajib Tertunggak",
+    totalDeposit: "Rp 1.500.000",
+  },
+  {
+    id: 6,
+    code: "A006",
+    name: "Rini Nuraini",
+    gender: "Perempuan",
+    status: "Aktif",
+    date: "02 Mei 2024",
+    email: "rini.nuraini@email.com",
+    nik: "3271044492090003",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 4.600.000",
+  },
+  {
+    id: 7,
+    code: "A007",
+    name: "Ahmad Sudrajat",
+    gender: "Laki-laki",
+    status: "Aktif",
+    date: "10 Jun 2024",
+    email: "ahmad.sudrajat@email.com",
+    nik: "3271041584060009",
+    depositStatus: "Simpanan Pokok Lunas",
+    totalDeposit: "Rp 3.120.000",
+  },
+  {
+    id: 8,
+    code: "A008",
+    name: "Maya Indriati",
+    gender: "Perempuan",
+    status: "Menunggu Verifikasi",
+    date: "01 Okt 2026",
+    email: "maya.i@email.com",
+    nik: "3271046798120007",
+    depositStatus: "Menunggu Verifikasi Berkas",
+    totalDeposit: "Rp 0",
   },
 ];
 

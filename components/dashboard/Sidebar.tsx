@@ -88,7 +88,11 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
               {/* Anggota */}
               <Link
                 href="/dashboard/anggota"
-                className="flex items-center gap-3 px-3 py-2 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium"
+                className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-semibold ${
+                  isLinkActive("/dashboard/anggota")
+                    ? "bg-[#2563EB] text-white shadow-sm"
+                    : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                }`}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
