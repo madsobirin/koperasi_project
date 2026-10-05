@@ -5,7 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function Header() {
+interface HeaderProps {
+  onToggleSidebar?: () => void;
+}
+
+export default function Header({ onToggleSidebar }: HeaderProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -21,23 +25,36 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-64 right-0 h-16 bg-white border-b border-[#E2E8F0] z-40 px-6 sm:px-8 flex items-center justify-between">
-      {/* Breadcrumb */}
+    <header className="fixed top-0 left-0 lg:left-64 right-0 h-16 bg-white border-b border-[#E2E8F0] z-30 px-4 sm:px-8 flex items-center justify-between">
+      {/* Left: Mobile Toggle & Breadcrumb */}
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 text-[#505f76] text-xs sm:text-[13px] font-medium">
-          <svg className="w-4 h-4 text-[#505f76]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        {onToggleSidebar && (
+          <button
+            type="button"
+            onClick={onToggleSidebar}
+            className="lg:hidden p-1.5 text-[#64748B] hover:text-[#0F172A] rounded-lg hover:bg-[#F8FAFC] cursor-pointer"
+            aria-label="Menu"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/>
+            </svg>
+          </button>
+        )}
+
+        <div className="flex items-center gap-2 text-[#64748B] text-xs sm:text-[13px] font-medium">
+          <svg className="w-4 h-4 text-[#64748B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
           <span className="text-[#94A3B8]">/</span>
-          <span className="font-semibold text-[#131b2e]">Koperasi</span>
+          <span className="font-semibold text-[#0F172A]">Koperasi</span>
         </div>
       </div>
 
       {/* Right Tools & User Profile */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         {/* Search Input */}
-        <div className="relative w-64 sm:w-80">
+        <div className="relative hidden sm:block sm:w-72 lg:w-80">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] pointer-events-none flex items-center">
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
@@ -46,14 +63,14 @@ export default function Header() {
           <input
             type="text"
             placeholder="Cari transaksi, anggota, atau akun..."
-            className="w-full h-9 pl-9 pr-3 rounded-lg border border-[#E2E8F0] bg-white text-[#131b2e] text-xs sm:text-[13px] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#EFF6FF] transition-all"
+            className="w-full h-9 pl-9 pr-3 rounded-lg border border-[#E2E8F0] bg-white text-[#0F172A] text-xs sm:text-[13px] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#EFF6FF] transition-all"
           />
         </div>
 
         {/* Notifications Button */}
         <button
           type="button"
-          className="relative w-9 h-9 rounded-lg border border-[#E2E8F0] hover:bg-[#F8FAFC] flex items-center justify-center text-[#505f76] transition-colors cursor-pointer"
+          className="relative w-9 h-9 rounded-lg border border-[#E2E8F0] hover:bg-[#F8FAFC] flex items-center justify-center text-[#64748B] transition-colors cursor-pointer"
           aria-label="Lihat notifikasi"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -69,9 +86,9 @@ export default function Header() {
         <div className="relative" ref={dropdownRef}>
           <div
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="flex items-center gap-3 cursor-pointer group select-none p-1 rounded-lg hover:bg-[#F8FAFC] transition-colors"
+            className="flex items-center gap-2.5 cursor-pointer group select-none p-1 rounded-lg hover:bg-[#F8FAFC] transition-colors"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden ring-1 ring-[#E2E8F0] bg-blue-100 flex items-center justify-center text-[#004ac6] font-bold text-xs">
+            <div className="w-8 h-8 rounded-full overflow-hidden ring-1 ring-[#E2E8F0] bg-blue-100 flex items-center justify-center text-[#2563EB] font-bold text-xs shrink-0">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrcvmNhDUZIw96dYZZ7nVa6FmQfkkDaCVMyDCTv0F-7O3Bv8ehZfqGwjlVwlV1TfSPNfIhvuHl2TKMoTkZY2EBBJ0K_-68I5QacWN4rDOFo2mHdzkLH4xsn00svzRlMkdw7PZ5bsTrQtcs6uLOwNLsnDZkf1813e2u5_yH3ayVp8F626YzjpwpmBzX4g4pTToCItqgL80eBxM7RYC5kvv-G1hb0BfbKGb74q1NVBlWzRQNRi5oyrl_Og"
                 alt="Profile Budi Pratama"
@@ -81,8 +98,8 @@ export default function Header() {
                 unoptimized
               />
             </div>
-            <div className="flex flex-col text-left">
-              <span className="text-xs sm:text-[13px] font-bold text-[#131b2e] leading-tight group-hover:text-[#004ac6] transition-colors">
+            <div className="hidden sm:flex flex-col text-left">
+              <span className="text-xs sm:text-[13px] font-bold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors">
                 Budi Pratama
               </span>
               <span className="text-[11px] text-[#94A3B8] leading-tight">
@@ -90,7 +107,7 @@ export default function Header() {
               </span>
             </div>
             <svg
-              className={`w-4 h-4 text-[#94A3B8] group-hover:text-[#131b2e] transition-transform duration-200 ${
+              className={`w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#0F172A] transition-transform duration-200 ${
                 isProfileOpen ? "rotate-180" : ""
               }`}
               viewBox="0 0 24 24"
@@ -106,12 +123,12 @@ export default function Header() {
           {isProfileOpen && (
             <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-[#E2E8F0] z-50 p-2 space-y-1 animate-in fade-in duration-150">
               <div className="px-3 py-2 border-b border-[#E2E8F0] mb-1">
-                <div className="text-xs font-bold text-[#131b2e]">Budi Pratama</div>
+                <div className="text-xs font-bold text-[#0F172A]">Budi Pratama</div>
                 <div className="text-[11px] text-[#94A3B8]">ADM-0492 • Administrator</div>
               </div>
               <Link
                 href="/dashboard#profil"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-[#505f76] hover:bg-[#F8FAFC] hover:text-[#131b2e] transition-colors"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors"
                 onClick={() => setIsProfileOpen(false)}
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -121,7 +138,7 @@ export default function Header() {
               </Link>
               <Link
                 href="/dashboard#pengaturan"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-[#505f76] hover:bg-[#F8FAFC] hover:text-[#131b2e] transition-colors"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors"
                 onClick={() => setIsProfileOpen(false)}
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

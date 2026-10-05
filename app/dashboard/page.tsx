@@ -11,6 +11,7 @@ import LiquidityCard from "@/components/dashboard/LiquidityCard";
 import RecentMembers from "@/components/dashboard/RecentMembers";
 
 export default function DashboardPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedPeriod, setSelectedPeriod] = useState("Hari ini: 05 Oktober 2026");
   const [isPeriodOpen, setIsPeriodOpen] = useState(false);
   const [isTrxOpen, setIsTrxOpen] = useState(false);
@@ -32,32 +33,32 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="bg-[#F8FAFC] min-h-screen text-[#131b2e] font-sans antialiased">
+    <div className="bg-[#F8FAFC] min-h-screen text-[#0F172A] font-sans antialiased">
       {/* Sidebar Navigation */}
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       {/* Main Layout Area */}
-      <div className="pl-64 flex flex-col min-h-screen">
-        {/* Top Header */}
-        <Header />
+      <div className="lg:pl-64 flex flex-col min-h-screen">
+        {/* Top Header with Mobile Drawer Toggle */}
+        <Header onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         {/* Dashboard Content */}
-        <main className="w-full pt-20 px-6 sm:px-8 py-8 bg-[#F8FAFC] flex-1">
+        <main className="w-full pt-20 px-4 sm:px-8 py-8 bg-[#F8FAFC] flex-1">
           <div className="flex flex-col w-full max-w-[1400px] mx-auto">
             
-            {/* Greeting & Action Toolbar */}
+            {/* Greeting & Action Toolbar (design.md Section 8) */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h1 className="text-2xl lg:text-[28px] font-bold text-[#131b2e] tracking-tight">
+                  <h1 className="text-2xl lg:text-[28px] font-bold text-[#0F172A] tracking-tight">
                     Dashboard
                   </h1>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#004ac6] border border-blue-100">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-blue-100">
                     Tahun Buku 2026
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#505f76]">
-                  Selamat datang kembali, <strong className="text-[#131b2e] font-semibold">Budi Pratama</strong>. Berikut ringkasan aktivitas keuangan dan operasional koperasi hari ini.
+                <p className="text-xs sm:text-sm text-[#64748B]">
+                  Selamat datang kembali, <strong className="text-[#0F172A] font-semibold">Budi Pratama</strong>. Berikut ringkasan aktivitas keuangan dan operasional koperasi hari ini.
                 </p>
               </div>
 
@@ -71,7 +72,7 @@ export default function DashboardPage() {
                       setIsPeriodOpen(!isPeriodOpen);
                       setIsTrxOpen(false);
                     }}
-                    className="h-9 px-3.5 bg-white text-[#131b2e] text-xs sm:text-[13px] font-semibold rounded-lg border border-[#E2E8F0] shadow-xs hover:bg-[#F8FAFC] transition-colors flex items-center gap-2 cursor-pointer"
+                    className="h-9 px-3.5 bg-white text-[#0F172A] text-xs sm:text-[13px] font-semibold rounded-lg border border-[#E2E8F0] shadow-xs hover:bg-[#F8FAFC] transition-colors flex items-center gap-2 cursor-pointer"
                   >
                     <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
@@ -99,13 +100,13 @@ export default function DashboardPage() {
                           }}
                           className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors cursor-pointer ${
                             selectedPeriod === item
-                              ? "bg-[#EFF6FF] text-[#004ac6] font-semibold"
-                              : "text-[#505f76] hover:bg-[#F8FAFC] hover:text-[#131b2e]"
+                              ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
+                              : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
                           }`}
                         >
                           <span>{item}</span>
                           {selectedPeriod === item && (
-                            <svg className="w-3.5 h-3.5 text-[#004ac6]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <svg className="w-3.5 h-3.5 text-[#2563EB]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                               <polyline points="20 6 9 17 4 12"/>
                             </svg>
                           )}
@@ -119,9 +120,9 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => window.print()}
-                  className="h-9 px-3.5 bg-white text-[#131b2e] hover:bg-[#F8FAFC] text-xs sm:text-[13px] font-semibold rounded-lg border border-[#E2E8F0] shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="h-9 px-3.5 bg-white text-[#0F172A] hover:bg-[#F8FAFC] text-xs sm:text-[13px] font-semibold rounded-lg border border-[#E2E8F0] shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
                 >
-                  <svg className="w-4 h-4 text-[#505f76]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-4 h-4 text-[#64748B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/>
                   </svg>
                   <span className="hidden sm:inline">Cetak Ringkasan</span>
@@ -135,7 +136,7 @@ export default function DashboardPage() {
                       setIsTrxOpen(!isTrxOpen);
                       setIsPeriodOpen(false);
                     }}
-                    className="h-9 px-4 bg-[#004ac6] text-white hover:bg-[#1D4ED8] text-xs sm:text-[13px] font-semibold rounded-lg shadow-sm transition-all flex items-center gap-2 cursor-pointer"
+                    className="h-9 px-4 bg-[#2563EB] text-white hover:bg-[#1D4ED8] text-xs sm:text-[13px] font-semibold rounded-lg shadow-xs transition-all flex items-center gap-2 cursor-pointer"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/>
@@ -151,15 +152,15 @@ export default function DashboardPage() {
                       <button
                         type="button"
                         onClick={() => setIsTrxOpen(false)}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f2f3ff] text-[#131b2e] text-xs transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] text-xs transition-colors cursor-pointer text-left"
                       >
-                        <div className="w-7 h-7 rounded-md bg-blue-50 flex items-center justify-center text-[#004ac6] shrink-0">
+                        <div className="w-7 h-7 rounded-md bg-blue-50 flex items-center justify-center text-[#2563EB] shrink-0">
                           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
                           </svg>
                         </div>
                         <div>
-                          <div className="font-bold text-[#131b2e]">Penjualan Kasir</div>
+                          <div className="font-bold text-[#0F172A]">Penjualan Kasir</div>
                           <div className="text-[10px] text-[#94A3B8]">Barang &amp; jasa toko</div>
                         </div>
                       </button>
@@ -167,7 +168,7 @@ export default function DashboardPage() {
                       <button
                         type="button"
                         onClick={() => setIsTrxOpen(false)}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f2f3ff] text-[#131b2e] text-xs transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] text-xs transition-colors cursor-pointer text-left"
                       >
                         <div className="w-7 h-7 rounded-md bg-amber-50 flex items-center justify-center text-[#F59E0B] shrink-0">
                           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -175,7 +176,7 @@ export default function DashboardPage() {
                           </svg>
                         </div>
                         <div>
-                          <div className="font-bold text-[#131b2e]">Faktur Pembelian</div>
+                          <div className="font-bold text-[#0F172A]">Faktur Pembelian</div>
                           <div className="text-[10px] text-[#94A3B8]">Pasokan stok supplier</div>
                         </div>
                       </button>
@@ -183,7 +184,7 @@ export default function DashboardPage() {
                       <button
                         type="button"
                         onClick={() => setIsTrxOpen(false)}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#f2f3ff] text-[#131b2e] text-xs transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] text-xs transition-colors cursor-pointer text-left"
                       >
                         <div className="w-7 h-7 rounded-md bg-emerald-50 flex items-center justify-center text-[#16A34A] shrink-0">
                           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -191,7 +192,7 @@ export default function DashboardPage() {
                           </svg>
                         </div>
                         <div>
-                          <div className="font-bold text-[#131b2e]">Setor Simpanan</div>
+                          <div className="font-bold text-[#0F172A]">Setor Simpanan</div>
                           <div className="text-[10px] text-[#94A3B8]">Pokok, wajib &amp; sukarela</div>
                         </div>
                       </button>
