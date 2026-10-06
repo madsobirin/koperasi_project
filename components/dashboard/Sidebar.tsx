@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
     if (path === "/dashboard") {
       return pathname === "/dashboard";
     }
-    return pathname.startsWith(path);
+    return pathname === path || pathname.startsWith(path + "/");
   };
 
   return (
@@ -157,18 +157,26 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 <div className="space-y-0.5">
                   <Link
                     href="/dashboard/akuntansi/buku-besar"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/akuntansi/buku-besar")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/>
                     </svg>
                     <span className="flex-1">Buku Besar</span>
                   </Link>
                   <Link
                     href="/dashboard/akuntansi/neraca-saldo"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/akuntansi/neraca-saldo")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
                     </svg>
                     <span className="flex-1">Neraca Saldo</span>
@@ -184,45 +192,65 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 <div className="space-y-0.5">
                   <Link
                     href="/dashboard/laporan/posisi-keuangan"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/laporan/posisi-keuangan") || isLinkActive("/dashboard/posisi-keuangan")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M3 21h18"/><path d="M3 10h18"/><path d="m5 6 7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/>
                     </svg>
                     <span className="flex-1">Posisi Keuangan</span>
                   </Link>
                   <Link
                     href="/dashboard/laporan/shu"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/laporan/shu") || isLinkActive("/dashboard/shu")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/>
                     </svg>
-                    <span className="flex-1">Perhitungan Hasil Usaha</span>
+                    <span className="flex-1">Hasil Usaha (SHU)</span>
                   </Link>
                   <Link
                     href="/dashboard/laporan/perubahan-ekuitas"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/laporan/perubahan-ekuitas") || isLinkActive("/dashboard/perubahan-ekuitas")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><path d="M18 8h4a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4"/><circle cx="8" cy="12" r="2"/>
                     </svg>
                     <span className="flex-1">Perubahan Ekuitas</span>
                   </Link>
                   <Link
                     href="/dashboard/laporan/arus-kas"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/laporan/arus-kas") || isLinkActive("/dashboard/arus-kas")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
                     </svg>
                     <span className="flex-1">Arus Kas</span>
                   </Link>
                   <Link
                     href="/dashboard/laporan/calk"
-                    className="flex items-center gap-3 px-3 py-1.5 text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A] transition-colors rounded-lg text-xs sm:text-[13px] font-medium pl-6"
+                    className={`flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-xs sm:text-[13px] font-medium pl-6 ${
+                      isLinkActive("/dashboard/laporan/calk") || isLinkActive("/dashboard/calk")
+                        ? "bg-[#2563EB] text-white font-semibold shadow-xs"
+                        : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]"
+                    }`}
                   >
-                    <svg className="w-4 h-4 text-[#94A3B8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
                     </svg>
                     <span className="flex-1">CALK</span>
